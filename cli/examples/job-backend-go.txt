@@ -1,0 +1,25 @@
+Senior Backend Engineer - Go/Distributed Systems
+
+We're looking for an experienced backend engineer to join our platform team. You'll be building scalable, high-throughput distributed systems that power our core services.
+
+Requirements:
+- 3+ years of production experience with Go
+- Deep understanding of distributed systems concepts (consistency, fault tolerance, etc.)
+- Experience with event-driven architectures and message queues (Kafka, RabbitMQ, etc.)
+- Strong AWS knowledge (Lambda, ECS, or similar container orchestration)
+- Experience building and maintaining microservices
+- Proficiency with observability tools (logging, monitoring, alerting)
+
+Nice to have:
+- Experience with workflow orchestration frameworks
+- Knowledge of gRPC and REST API design
+- Infrastructure as code (Terraform, CDK)
+- Financial services or fintech background
+- Experience with testing strategies for distributed systems
+
+You'll be:
+- Designing and implementing high-availability systems
+- Working with event-driven architectures
+- Building reliable, fault-tolerant services
+- Collaborating with cross-functional teams
+- Participating in on-call rotation

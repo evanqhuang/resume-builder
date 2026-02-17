@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: ./cli
+    volumes:
+      - ./resume.yaml:/app/resume.yaml:ro
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_MODEL=${OPENROUTER_MODEL:-anthropic/claude-sonnet-4}
+    command: ["serve", "--port", "8080", "--resume", "/app/resume.yaml"]
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/api/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  frontend:
+    build: ./web/frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./web/frontend/src:/app/src
+    environment:
+      - API_PROXY_TARGET=http://backend:8080
+    depends_on:
+      backend:
+        condition: service_healthy

@@ -1,0 +1,244 @@
+contact:
+  name: Evan Huang
+  email: evanhuang117@gmail.com
+  phone: 262-873-0558
+  linkedin: linkedin.com/in/evanqhuang
+  github: github.com/evanqhuang
+
+education:
+  institution: The Ohio State University – Engineering Scholars
+  location: Columbus, Ohio
+  degree: B.S. Computer Science and Engineering – AI
+  minor: Psychology
+  gpa: 3.86/4.00
+  honors: Magna Cum Laude
+
+skills:
+  languages:
+    - name: Go
+      tags: [go, backend, systems-programming, concurrency]
+    - name: Python
+      tags: [python, scripting, automation, data-processing, ml]
+    - name: Java
+      tags: [java, backend, enterprise]
+    - name: Scala
+      tags: [scala, functional-programming, backend]
+    - name: TypeScript
+      tags: [typescript, frontend, backend, type-safety]
+    - name: JavaScript
+      tags: [javascript, frontend, web]
+    - name: SQL
+      tags: [sql, database, data-modeling]
+    - name: Elm
+      tags: [elm, functional-programming, frontend]
+
+  frameworks:
+    - name: Docker
+      tags: [docker, containers, devops, infrastructure]
+    - name: React
+      tags: [react, frontend, web, ui]
+    - name: Restate
+      tags: [restate, distributed-systems, durable-execution, workflow-orchestration]
+    - name: Angular
+      tags: [angular, frontend, web, ui]
+    - name: Kafka
+      tags: [kafka, event-driven, streaming, distributed-systems, messaging]
+    - name: gRPC
+      tags: [grpc, api, microservices, rpc]
+    - name: Splunk
+      tags: [splunk, logging, monitoring, observability]
+    - name: PagerDuty
+      tags: [pagerduty, alerting, incident-management, oncall]
+
+  cloud:
+    - name: AWS Certified Solutions Architect
+      tags: [aws, cloud, certification, solutions-architect]
+    - name: Lambda
+      tags: [lambda, serverless, aws, faas]
+    - name: Fargate
+      tags: [fargate, containers, aws, serverless]
+    - name: CDK
+      tags: [cdk, infrastructure-as-code, aws, iac]
+    - name: ECS
+      tags: [ecs, containers, aws, orchestration]
+    - name: GCP
+      tags: [gcp, cloud, google-cloud]
+    - name: Cloud Run
+      tags: [cloud-run, serverless, gcp, containers]
+    - name: Terraform
+      tags: [terraform, infrastructure-as-code, iac, devops]
+    - name: Firebase
+      tags: [firebase, backend-as-a-service, gcp, mobile]
+
+experience:
+  - id: cap1-software-engineer
+    title: Software Engineer
+    company: Capital One
+    location: McLean, VA
+    start_date: August 2023
+    end_date: Present
+    tags: [capital-one, fintech, go, python, elm, distributed-systems, event-driven, aws, kafka]
+    bullets:
+      - id: cap1-event-driven-transaction-processing
+        text: Architected high-throughput event-driven card transaction processing system using Go, Restate, Lambda, and Kafka; 15-min RTO/RPO through idempotent processing and active-active design
+        tags: [go, restate, lambda, kafka, event-driven, distributed-systems, architecture, high-availability, disaster-recovery, idempotency, serverless, fintech, transactions]
+
+      - id: cap1-account-booking-orchestration
+        text: Built parallel Python orchestration script for new account booking platform; coordinated transactions across 5+ microservices (booking, issuance, printing) with event-driven Kafka validation, enabling critical POC for 140M+ account migration
+        tags: [python, orchestration, microservices, kafka, event-driven, distributed-systems, fintech, migration, transactions, validation]
+
+      - id: cap1-elm-test-performance
+        text: Proactively identified and resolved test performance bottleneck in Elm functional test suite; reduced local test and CI/CD pipeline time by 50% (400s→200s), saving 150+ engineering hours monthly across 30+ engineers
+        tags: [elm, testing, performance-optimization, ci-cd, developer-experience, functional-programming, bottleneck-analysis]
+
+      - id: cap1-elm-compiler-parser
+        text: Independently identified and solved DX bottleneck affecting 30+ engineers; built recursive descent parser in Python with tree traversal algorithm to decode cryptic Elm/Morphir compiler errors, reducing diagnosis time from 10min to <1min (90%)
+        tags: [python, parsing, compiler-engineering, algorithms, tree-traversal, developer-experience, elm, morphir, tooling]
+
+      - id: cap1-production-monitoring
+        text: Designed production monitoring infrastructure from scratch; implemented structured logging with Splunk, configured PagerDuty escalation policies, and established SLA alerting thresholds; achieved zero-downtime POC launch with full observability into distributed system health
+        tags: [monitoring, observability, splunk, pagerduty, logging, alerting, sla, distributed-systems, incident-management, zero-downtime]
+
+      - id: cap1-restate-testing-framework
+        text: Built Go testing framework from scratch for Restate durable execution workflows, enabling first E2E validation of async orchestration and Kafka event streams
+        tags: [go, testing, restate, durable-execution, workflow-orchestration, e2e-testing, kafka, event-driven, async, framework-development]
+
+      - id: cap1-preapproval-platform
+        text: Drove $60M annual present value and 18% booking increase by building small business credit card preapproval platform
+        tags: [fintech, credit-cards, small-business, platform-development, business-impact]
+
+      - id: cap1-knowledge-graph
+        text: Designed and built a graph-based knowledge platform (Neo4j, FastAPI, vector embeddings) that ingests entire codebases and documentation, enabling semantic search across repositories and automated traceability between code structures, product requirements, and internal knowledge bases
+        tags: [neo4j, graph-database, fastapi, python, vector-embeddings, semantic-search, knowledge-management, documentation, ai, ml, nlp, codebase-analysis]
+
+  - id: cap1-intern-sf-2022
+    title: Software Engineering Intern
+    company: Capital One
+    location: San Francisco, CA
+    start_date: June 2022
+    end_date: August 2022
+    tags: [capital-one, fintech, scala, blockchain, internship]
+    bullets:
+      - id: cap1-blockchain-verification
+        text: Engineered tamper-proof blockchain verification layer in Scala/ZIO for internal card transaction ledger, validating integrity of 10B+ transaction records with cryptographic hashing and Merkle tree structures for O(log n) verification
+        tags: [scala, zio, functional-programming, blockchain, cryptography, merkle-tree, data-structures, algorithms, fintech, transactions, verification]
+
+  - id: cap1-intern-remote-2021
+    title: Software Engineering Intern
+    company: Capital One
+    location: McLean, VA (Remote)
+    start_date: June 2021
+    end_date: August 2021
+    tags: [capital-one, fintech, scala, spark, aws, internship]
+    bullets:
+      - id: cap1-spark-data-pipeline
+        text: Developed Apache Spark data pipeline in Scala identifying untracked DynamoDB datasets across 5,300 tables and 400+ teams; designed PostgreSQL schema with normalization, implemented AWS IAM roles, VPC configuration, and HTTP auth for secure distributed communication
+        tags: [scala, spark, data-pipeline, dynamodb, postgresql, database-design, normalization, aws, iam, vpc, security, distributed-systems, big-data]
+
+  - id: hashtop-founder
+    title: Founder
+    company: HashTop
+    location: Avon Lake, Ohio
+    start_date: "2020"
+    end_date: "2023"
+    tags: [entrepreneurship, crypto, full-stack, distributed-systems, azure]
+    bullets:
+      - id: hashtop-revenue
+        text: Launched a fully managed cryptocurrency mining and monitoring platform, generating $40K in revenue within 2 months
+        tags: [entrepreneurship, crypto, cryptocurrency-mining, business, product-launch]
+
+      - id: hashtop-signal-detection
+        text: Engineered automated signal detection system scraping Reddit with regex-based GPU model classification and pricing evaluation; implemented Slack webhook notifications to alert on potential arbitrage opportunities
+        tags: [python, web-scraping, regex, automation, signal-processing, slack, webhooks, arbitrage, gpu, crypto]
+
+      - id: hashtop-distributed-architecture
+        text: Architected 3-tier distributed system; asynchronous REST API (backend), customer dashboard (frontend), and remote mining daemon (agent) for real-time GPU monitoring
+        tags: [architecture, distributed-systems, rest-api, async, frontend, backend, monitoring, real-time, crypto, 3-tier]
+
+      - id: hashtop-rest-api
+        text: Designed REST API with JWT authentication coordinating communication between web dashboard and distributed mining daemons; implemented SQL Server schema on Azure for time-series telemetry and customer account data
+        tags: [rest-api, jwt, authentication, sql-server, azure, database-design, time-series, telemetry, distributed-systems, crypto]
+
+projects:
+  - id: camazotz-ixchel
+    title: Camazotz-Ixchel - Real-Time Underwater Cave Mapping
+    technologies: C++17, Pico SDK, Three.js
+    github: github.com/evanqhuang/maxwells-razor
+    tags: [cpp, embedded, sensors, navigation, 3d, web, threejs, iot, firmware]
+    bullets:
+      - id: camazotz-dive-instrument
+        text: Designed and built complete dive instrument end-to-end; custom sensor sled packaged inside a GoPro dive housing, integrating 3 I2C sensor buses (IMU, encoder, depth) with RP2350 dual-core MCU running 100Hz quaternion-based dead reckoning for GPS-denied navigation
+        tags: [cpp, embedded, sensors, i2c, imu, mcu, rp2350, quaternion, dead-reckoning, navigation, gps-denied, hardware, firmware, real-time]
+
+      - id: camazotz-graceful-degradation
+        text: Engineered 3-tier graceful degradation with cross-sensor validation, enabling continued navigation when sensors fail
+        tags: [embedded, fault-tolerance, reliability, sensor-fusion, validation, graceful-degradation]
+
+      - id: camazotz-pio-i2c
+        text: Built custom PIO I2C state machine to resolve hardware peripheral contention, with timeout-protected transactions preventing bus lockups that starve USB CDC
+        tags: [embedded, pio, i2c, state-machine, hardware, low-level, concurrency, reliability, usb]
+
+      - id: camazotz-visualizer
+        text: Developed Three.js web visualizer for post-dive 3D path replay with depth-coded rendering, timeline scrubbing, and stick map PNG export for cave survey records
+        tags: [threejs, javascript, web, 3d, visualization, frontend, data-visualization]
+
+  - id: brickspect
+    title: Brickspect - AI Commercial Real Estate Due Diligence
+    technologies: Python, Go, GCP, Terraform, MCP
+    tags: [python, go, gcp, terraform, ai, real-estate, serverless, microservices]
+    bullets:
+      - id: brickspect-agentic-ai
+        text: Built agentic AI system using Model Context Protocol for automated commercial real estate property due diligence; architected serverless infrastructure on GCP with microservices (Go MCP server, Python search service, Cloud Run)
+        tags: [python, go, ai, llm, agents, mcp, gcp, cloud-run, serverless, microservices, real-estate, architecture, terraform, iac]
+
+  - id: maxwells-razor
+    title: Maxwell's Razor - Modular 3D Printer Tool Changer
+    technologies: Klipper, CAD, Motion Control
+    github: github.com/evanqhuang/maxwells-razor
+    tags: [3d-printing, firmware, cad, motion-control, hardware, open-source]
+    bullets:
+      - id: maxwells-toolchanger
+        text: Engineered complete toolchanger including mechanical kinematic coupling and Klipper firmware configuration; programmed G-code macros for automated tool parking, pickup sequences, and coordinated multi-axis movements during tool swaps
+        tags: [firmware, klipper, gcode, motion-control, automation, mechanical-engineering, 3d-printing, hardware]
+
+      - id: maxwells-cost-reduction
+        text: Iterated from hybrid metal/plastic to fully 3D-printed design reducing cost to $20/toolhead (95% cheaper than $2,500 Prusa XL)
+        tags: [3d-printing, cost-optimization, design-iteration, hardware, manufacturing]
+
+      - id: maxwells-open-source
+        text: Open-sourced mechanical designs and firmware motion profiles under CERN-OHL license
+        tags: [open-source, licensing, cern-ohl, hardware, firmware, community]
+
+  - id: home-server
+    title: Home Server
+    technologies: Proxmox VE, Linux, Docker Compose, OpenZFS
+    tags: [linux, virtualization, docker, storage, homelab, self-hosted, ml, ai]
+    bullets:
+      - id: homeserver-proxmox
+        text: Built Proxmox hypervisor managing 5+ Linux VMs through CLI with GPU-enabled instances for ML/AI workloads
+        tags: [proxmox, virtualization, linux, cli, gpu, ml, ai, infrastructure, homelab]
+
+      - id: homeserver-zfs
+        text: Configured OpenZFS storage with RAIDZ2 redundancy; orchestrated services using Docker Compose
+        tags: [openzfs, storage, raid, redundancy, docker, docker-compose, infrastructure, homelab]
+
+      - id: homeserver-diffusion
+        text: Trained and deployed large diffusion models (SDXL) for text-to-image (T2I) and image-to-image (I2I) tasks, including LoRA fine-tuning pipelines, on self-hosted GPU infrastructure
+        tags: [ml, ai, diffusion-models, sdxl, lora, fine-tuning, gpu, self-hosted, computer-vision, generative-ai]
+
+      - id: homeserver-llm
+        text: Fine tuned and self-hosted large language models (LLMs) such as Qwen and Mistral
+        tags: [ml, ai, llm, fine-tuning, self-hosted, qwen, mistral, nlp]
+
+leadership:
+  - id: codepath-mentor
+    text: "CodePath Technical Mentor: Provided resume reviews and interview coaching; mentored 5+ students to FAANG offers"
+    tags: [mentorship, coaching, career-development, interviewing, faang]
+
+  - id: capital-one-coders
+    text: Volunteered with Capital One Coders to provide a summer web development camp experience to middle school students
+    tags: [volunteering, education, web-development, community, capital-one]
+
+  - id: junior-engineer-mentoring
+    text: Mentored and onboarded 2 junior engineers, providing detailed guidance and feedback through PR reviews and 1:1 sessions
+    tags: [mentorship, onboarding, code-review, leadership, team-development]

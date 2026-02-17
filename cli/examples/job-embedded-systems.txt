@@ -1,0 +1,25 @@
+Embedded Systems Engineer
+
+We're seeking an embedded systems engineer to develop firmware for our next-generation IoT devices.
+
+Requirements:
+- Strong C/C++ programming skills
+- Experience with microcontrollers and embedded Linux
+- Understanding of I2C, SPI, UART, and other communication protocols
+- Experience with sensor integration and data processing
+- Knowledge of real-time operating systems
+- Ability to read schematics and work closely with hardware team
+
+Nice to have:
+- Experience with ARM Cortex-M or similar MCUs
+- 3D visualization and data presentation
+- CAD experience for enclosure design
+- Knowledge of power optimization techniques
+- Experience with wireless protocols (BLE, WiFi)
+
+You'll be:
+- Writing low-level firmware for resource-constrained devices
+- Integrating various sensors and peripherals
+- Debugging hardware/firmware integration issues
+- Optimizing for performance and power consumption
+- Building tools for data visualization and analysis

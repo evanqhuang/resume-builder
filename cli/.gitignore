@@ -1,0 +1,40 @@
+# Binary
+resume-cli
+
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output from the go coverage tool
+*.out
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+
+# Generated files
+*.pdf
+*.tex
+*.aux
+*.log
+*.out
+
+# Dependencies
+vendor/
+
+# OS files
+.DS_Store
+Thumbs.db
