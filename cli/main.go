@@ -246,14 +246,15 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	}
 	fmt.Printf("%sWrote LaTeX to: %s%s\n", colorGreen, texFile, colorReset)
 
-	// Check if pdflatex is available
-	if _, err := exec.LookPath("pdflatex"); err != nil {
-		return fmt.Errorf("pdflatex not found in PATH. Please install a TeX distribution (MacTeX, TeX Live, or MiKTeX)")
+	// Find xelatex
+	xelatexPath, err := generator.FindXelatex()
+	if err != nil {
+		return fmt.Errorf("xelatex not found in PATH. Please install a TeX distribution (MacTeX, TeX Live, or MiKTeX)")
 	}
 
 	// Compile to PDF
-	fmt.Printf("%sCompiling PDF with pdflatex...%s\n", colorCyan, colorReset)
-	if err := compilePDF(texFile); err != nil {
+	fmt.Printf("%sCompiling PDF with xelatex...%s\n", colorCyan, colorReset)
+	if err := compilePDF(texFile, xelatexPath); err != nil {
 		return fmt.Errorf("failed to compile PDF: %w", err)
 	}
 
@@ -332,13 +333,25 @@ func runServe(cmd *cobra.Command, args []string) error {
 	return server.Start(resumePath, serverPort)
 }
 
-func compilePDF(texFile string) error {
-	// Run pdflatex twice for proper formatting
+func compilePDF(texFile, xelatexPath string) error {
+	// Get the directory containing the tex file for output
+	outputDir := filepath.Dir(texFile)
+	if outputDir == "" || outputDir == "." {
+		outputDir, _ = os.Getwd()
+	}
+	// Convert to absolute path if needed
+	absTexFile, err := filepath.Abs(texFile)
+	if err != nil {
+		return fmt.Errorf("failed to get absolute path: %w", err)
+	}
+	absOutputDir := filepath.Dir(absTexFile)
+
+	// Run xelatex twice for proper formatting
 	for i := 0; i < 2; i++ {
-		cmd := exec.Command("pdflatex", "-interaction=nonstopmode", texFile)
+		cmd := exec.Command(xelatexPath, "-interaction=nonstopmode", "-output-directory="+absOutputDir, absTexFile)
 		output, err := cmd.CombinedOutput()
 		if err != nil {
-			return fmt.Errorf("pdflatex failed: %w\nOutput: %s", err, string(output))
+			return fmt.Errorf("xelatex failed: %w\nOutput: %s", err, string(output))
 		}
 	}
 	return nil

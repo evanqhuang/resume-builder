@@ -141,6 +141,8 @@ func escapeLaTeX(s string) string {
 		{"}", `\}`},
 		{"~", `\textasciitilde{}`},
 		{"^", `\textasciicircum{}`},
+		{"<", `\textless{}`},
+		{">", `\textgreater{}`},
 	}
 
 	for _, r := range replacements {
@@ -149,31 +151,33 @@ func escapeLaTeX(s string) string {
 	return result
 }
 
-// Common pdflatex installation paths to check
-var pdflatexPaths = []string{
-	"/Library/TeX/texbin/pdflatex",                          // MacTeX on macOS
-	"/usr/local/texlive/2024/bin/universal-darwin/pdflatex", // TeX Live 2024 macOS
-	"/usr/local/texlive/2023/bin/universal-darwin/pdflatex", // TeX Live 2023 macOS
-	"/usr/local/texlive/2024/bin/x86_64-linux/pdflatex",     // TeX Live 2024 Linux
-	"/usr/local/texlive/2023/bin/x86_64-linux/pdflatex",     // TeX Live 2023 Linux
-	"/usr/bin/pdflatex",                                      // System installation
+// Common xelatex installation paths to check
+var xelatexPaths = []string{
+	"/Library/TeX/texbin/xelatex",                          // MacTeX on macOS
+	"/usr/local/texlive/2025/bin/universal-darwin/xelatex", // TeX Live 2025 macOS
+	"/usr/local/texlive/2024/bin/universal-darwin/xelatex", // TeX Live 2024 macOS
+	"/usr/local/texlive/2023/bin/universal-darwin/xelatex", // TeX Live 2023 macOS
+	"/usr/local/texlive/2025/bin/x86_64-linux/xelatex",    // TeX Live 2025 Linux
+	"/usr/local/texlive/2024/bin/x86_64-linux/xelatex",    // TeX Live 2024 Linux
+	"/usr/local/texlive/2023/bin/x86_64-linux/xelatex",    // TeX Live 2023 Linux
+	"/usr/bin/xelatex",                                     // System installation
 }
 
-// findPdflatex locates the pdflatex executable
-func findPdflatex() (string, error) {
+// FindXelatex locates the xelatex executable
+func FindXelatex() (string, error) {
 	// First try PATH
-	if path, err := exec.LookPath("pdflatex"); err == nil {
+	if path, err := exec.LookPath("xelatex"); err == nil {
 		return path, nil
 	}
 
 	// Check common installation paths
-	for _, path := range pdflatexPaths {
+	for _, path := range xelatexPaths {
 		if _, err := os.Stat(path); err == nil {
 			return path, nil
 		}
 	}
 
-	return "", fmt.Errorf("pdflatex not found. Install LaTeX (e.g., 'brew install --cask mactex' on macOS)")
+	return "", fmt.Errorf("xelatex not found. Install LaTeX (e.g., 'brew install --cask mactex' on macOS)")
 }
 
 // GeneratePDF generates a PDF from resume data and returns the bytes
@@ -197,18 +201,18 @@ func GeneratePDF(r *resume.Resume, selectedIDs map[string]bool) ([]byte, error) 
 		return nil, fmt.Errorf("failed to write LaTeX file: %w", err)
 	}
 
-	// Find pdflatex
-	pdflatexPath, err := findPdflatex()
+	// Find xelatex
+	xelatexPath, err := FindXelatex()
 	if err != nil {
 		return nil, err
 	}
 
 	// Compile to PDF (run twice for proper formatting)
 	for i := 0; i < 2; i++ {
-		cmd := exec.Command(pdflatexPath, "-interaction=nonstopmode", "-output-directory="+tmpDir, texFile)
+		cmd := exec.Command(xelatexPath, "-interaction=nonstopmode", "-output-directory="+tmpDir, texFile)
 		output, err := cmd.CombinedOutput()
 		if err != nil {
-			return nil, fmt.Errorf("pdflatex failed: %w\nOutput: %s", err, string(output))
+			return nil, fmt.Errorf("xelatex failed: %w\nOutput: %s", err, string(output))
 		}
 	}
 

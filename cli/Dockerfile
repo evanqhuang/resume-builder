@@ -18,8 +18,11 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o resume-cli .
 # Runtime image
 FROM alpine:latest
 
-# Install texlive for PDF generation
-RUN apk add --no-cache texlive-full
+# Install texlive for PDF generation and fontconfig for font discovery
+RUN apk add --no-cache texlive-full fontconfig \
+    && mkdir -p /etc/fonts/conf.d \
+    && echo '<?xml version="1.0"?><!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd"><fontconfig><dir>/usr/share/texmf-dist/fonts/opentype</dir></fontconfig>' > /etc/fonts/conf.d/99-texlive.conf \
+    && fc-cache -f
 
 WORKDIR /app
 
