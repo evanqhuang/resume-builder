@@ -12,6 +12,7 @@ help:
 	@echo "  run-list       - List all resume items"
 	@echo "  run-match      - Match against sample backend job (requires API key)"
 	@echo "  run-generate   - Generate sample resume PDF"
+	@echo "  watch          - Start docker compose with auto-rebuild on file changes"
 
 build:
 	go build -o $(BINARY_NAME) .
@@ -37,3 +38,6 @@ run-generate: build
 
 run-generate-filtered: build
 	./$(BINARY_NAME) generate -o filtered-resume.pdf --tags go,distributed-systems,aws -r $(RESUME_PATH)
+
+watch:
+	cd .. && docker compose watch

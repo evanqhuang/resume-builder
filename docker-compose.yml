@@ -13,6 +13,12 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+    develop:
+      watch:
+        - action: rebuild
+          path: ./cli
+          ignore:
+            - "**/*_test.go"
 
   frontend:
     build: ./web/frontend

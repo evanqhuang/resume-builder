@@ -3,6 +3,7 @@ package resume
 // Resume represents the complete resume data structure
 type Resume struct {
 	Contact    ContactInfo         `yaml:"contact"`
+	Summary    string              `yaml:"summary" json:"summary"`
 	Education  EducationEntry      `yaml:"education"`
 	Skills     Skills              `yaml:"skills"`
 	Experience []ExperienceEntry   `yaml:"experience"`
@@ -13,6 +14,7 @@ type Resume struct {
 // ContactInfo holds personal contact information
 type ContactInfo struct {
 	Name     string `yaml:"name" json:"name"`
+	Location string `yaml:"location" json:"location"`
 	Email    string `yaml:"email" json:"email"`
 	Phone    string `yaml:"phone" json:"phone"`
 	LinkedIn string `yaml:"linkedin" json:"linkedin"`

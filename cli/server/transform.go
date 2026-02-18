@@ -7,6 +7,7 @@ import (
 // TransformedResume is the response format expected by the frontend
 type TransformedResume struct {
 	Contact    resume.ContactInfo       `json:"contact"`
+	Summary    string                   `json:"summary"`
 	Education  resume.EducationEntry    `json:"education"`
 	Skills     []SkillCategory          `json:"skills"`
 	Experience []TransformedExperience  `json:"experience"`
@@ -71,6 +72,7 @@ type TransformedLeadership struct {
 func TransformResume(r *resume.Resume) *TransformedResume {
 	return &TransformedResume{
 		Contact:    r.Contact,
+		Summary:    r.Summary,
 		Education:  r.Education,
 		Skills:     transformSkills(r.Skills),
 		Experience: transformExperience(r.Experience),

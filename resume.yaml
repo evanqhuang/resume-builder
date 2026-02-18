@@ -1,9 +1,14 @@
 contact:
   name: Evan Huang
+  location: McLean, VA
   email: evanhuang117@gmail.com
   phone: 262-873-0558
   linkedin: linkedin.com/in/evanqhuang
   github: github.com/evanqhuang
+
+summary: >-
+  Architected high-throughput event-driven card transaction processing system using Go, Restate, Lambda, and Kafka;
+  15-min RTO/RPO through idempotent processing and active-active design
 
 education:
   institution: The Ohio State University – Engineering Scholars
@@ -163,7 +168,7 @@ projects:
   - id: camazotz-ixchel
     title: Camazotz-Ixchel - Real-Time Underwater Cave Mapping
     technologies: C++17, Pico SDK, Three.js
-    github: github.com/evanqhuang/maxwells-razor
+    github: github.com/evanqhuang/camazotz-ixchel
     tags: [cpp, embedded, sensors, navigation, 3d, web, threejs, iot, firmware]
     bullets:
       - id: camazotz-dive-instrument

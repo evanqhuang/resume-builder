@@ -18,12 +18,13 @@ var modernTemplate string
 
 // TemplateData holds data for LaTeX template
 type TemplateData struct {
-	Contact      resume.ContactInfo
-	Education    resume.EducationEntry
-	Skills       resume.Skills
-	Experience   []ExperienceData
-	Projects     []ProjectData
-	Leadership   []string
+	Contact       resume.ContactInfo
+	Summary       string
+	Education     resume.EducationEntry
+	Skills        resume.Skills
+	Experience    []ExperienceData
+	Projects      []ProjectData
+	Leadership    []string
 	IncludeSkills bool
 }
 
@@ -68,9 +69,10 @@ func prepareTemplateData(r *resume.Resume, selectedIDs map[string]bool) Template
 	includeAll := len(selectedIDs) == 0
 
 	data := TemplateData{
-		Contact:      r.Contact,
-		Education:    r.Education,
-		Skills:       r.Skills,
+		Contact:       r.Contact,
+		Summary:       r.Summary,
+		Education:     r.Education,
+		Skills:        r.Skills,
 		IncludeSkills: true, // Always include skills section
 	}
 
@@ -143,6 +145,7 @@ func escapeLaTeX(s string) string {
 		{"^", `\textasciicircum{}`},
 		{"<", `\textless{}`},
 		{">", `\textgreater{}`},
+		{"→", `$\rightarrow$`},
 	}
 
 	for _, r := range replacements {

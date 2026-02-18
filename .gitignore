@@ -31,3 +31,5 @@ Thumbs.db
 
 # Generated
 web/backend/data/generated/*.pdf
+generated-resume.*
+test-spacing.tex
