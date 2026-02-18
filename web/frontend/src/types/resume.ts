@@ -79,3 +79,17 @@ export interface JobAnalysisResponse {
   scores: Record<string, number>;
   suggested_items: string[];
 }
+
+export interface SectionOrder {
+  experience: string[];
+  projects: string[];
+  leadership: string[];
+}
+
+export type SectionName = 'experience' | 'projects' | 'leadership';
+
+export interface PartialSectionOrder {
+  experience?: string[];
+  projects?: string[];
+  leadership?: string[];
+}

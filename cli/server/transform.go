@@ -1,6 +1,8 @@
 package server
 
 import (
+	"sort"
+
 	"github.com/evanqhuang/resume-cli/resume"
 )
 
@@ -188,4 +190,45 @@ func transformLeadership(entries []resume.LeadershipEntry) []TransformedLeadersh
 		}
 	}
 	return result
+}
+
+// toOrderMap builds a map from ID to position for O(1) lookup.
+func toOrderMap(ids []string) map[string]int {
+	m := make(map[string]int, len(ids))
+	for i, id := range ids {
+		m[id] = i
+	}
+	return m
+}
+
+// sortByOrder sorts a slice in-place according to an ordered list of IDs.
+// Items not in the order list are placed at the end, preserving relative order.
+func sortByOrder[T any](items []T, orderIDs []string, getID func(T) string) {
+	if len(orderIDs) == 0 {
+		return
+	}
+	om := toOrderMap(orderIDs)
+	fallback := len(items)
+	sort.SliceStable(items, func(i, j int) bool {
+		iOrder, iOk := om[getID(items[i])]
+		jOrder, jOk := om[getID(items[j])]
+		if !iOk {
+			iOrder = fallback
+		}
+		if !jOk {
+			jOrder = fallback
+		}
+		return iOrder < jOrder
+	})
+}
+
+// ApplyOrder sorts transformed resume arrays according to custom order.
+// Operates on TransformedResume to avoid mutating the cached Resume.
+func ApplyOrder(tr *TransformedResume, order *SectionOrder) {
+	if order == nil {
+		return
+	}
+	sortByOrder(tr.Experience, order.Experience, func(e TransformedExperience) string { return e.ID })
+	sortByOrder(tr.Projects, order.Projects, func(p TransformedProject) string { return p.ID })
+	sortByOrder(tr.Leadership, order.Leadership, func(l TransformedLeadership) string { return l.ID })
 }

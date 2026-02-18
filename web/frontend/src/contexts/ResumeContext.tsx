@@ -1,5 +1,5 @@
 import { createContext, useReducer, ReactNode } from 'react';
-import type { Resume, JobAnalysisResponse } from '../types/resume';
+import type { Resume, JobAnalysisResponse, SectionName } from '../types/resume';
 
 interface ResumeState {
   resume: Resume | null;
@@ -21,7 +21,8 @@ type ResumeAction =
   | { type: 'SET_JOB_ANALYSIS'; payload: JobAnalysisResponse }
   | { type: 'APPLY_SUGGESTIONS'; payload: { threshold: number } }
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null };
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'REORDER_SECTION'; payload: { section: SectionName; order: string[] } };
 
 const initialState: ResumeState = {
   resume: null,
@@ -29,6 +30,13 @@ const initialState: ResumeState = {
   isLoading: false,
   error: null,
 };
+
+function reorderSection<T extends { id: string }>(items: T[], order: string[]): T[] {
+  const orderMap = new Map(order.map((id, idx) => [id, idx]));
+  return [...items].sort(
+    (a, b) => (orderMap.get(a.id) ?? items.length) - (orderMap.get(b.id) ?? items.length)
+  );
+}
 
 const resumeReducer = (state: ResumeState, action: ResumeAction): ResumeState => {
   switch (action.type) {
@@ -237,6 +245,18 @@ const resumeReducer = (state: ResumeState, action: ResumeAction): ResumeState =>
       return {
         ...state,
         resume: { ...state.resume, skills, experience, projects, leadership },
+      };
+    }
+
+    case 'REORDER_SECTION': {
+      if (!state.resume) return state;
+      const { section, order } = action.payload;
+      return {
+        ...state,
+        resume: {
+          ...state.resume,
+          [section]: reorderSection(state.resume[section] as { id: string }[], order),
+        },
       };
     }
 

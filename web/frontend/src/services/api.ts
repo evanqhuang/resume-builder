@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Resume, JobAnalysisResponse } from '../types/resume';
+import type { Resume, JobAnalysisResponse, PartialSectionOrder } from '../types/resume';
 
 const api = axios.create({
   baseURL: '',
@@ -31,4 +31,8 @@ export const generatePdf = async (selections: Record<string, unknown>): Promise<
     responseType: 'blob',
   });
   return response.data;
+};
+
+export const saveOrder = async (order: PartialSectionOrder): Promise<void> => {
+  await api.put('/api/order', order);
 };

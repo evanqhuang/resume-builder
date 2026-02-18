@@ -34,6 +34,7 @@ func registerRoutes(r chi.Router, s *Server) {
 		r.Post("/resume/reload", s.handleReloadResume)
 		r.Post("/job/analyze", s.handleAnalyzeJob)
 		r.Post("/generate", s.handleGenerate)
+		r.Put("/order", s.handleSaveOrder)
 	})
 }
 
@@ -73,7 +74,15 @@ func loadResume(forceReload bool) (*resume.Resume, error) {
 }
 
 func (s *Server) handleGetResume(w http.ResponseWriter, r *http.Request) {
-	res, err := loadResume(false)
+	s.respondWithResume(w, false)
+}
+
+func (s *Server) handleReloadResume(w http.ResponseWriter, r *http.Request) {
+	s.respondWithResume(w, true)
+}
+
+func (s *Server) respondWithResume(w http.ResponseWriter, forceReload bool) {
+	res, err := loadResume(forceReload)
 	if err != nil {
 		log.Printf("Error loading resume: %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -82,27 +91,17 @@ func (s *Server) handleGetResume(w http.ResponseWriter, r *http.Request) {
 	}
 
 	transformed := TransformResume(res)
-	if err := json.NewEncoder(w).Encode(transformed); err != nil {
-		log.Printf("Error encoding response: %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-}
 
-func (s *Server) handleReloadResume(w http.ResponseWriter, r *http.Request) {
-	res, err := loadResume(true)
+	order, err := LoadOrder(s.orderPath(), res)
 	if err != nil {
-		log.Printf("Error reloading resume: %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
-		return
+		log.Printf("Error loading order: %v", err)
+	} else {
+		ApplyOrder(transformed, order)
 	}
 
-	transformed := TransformResume(res)
 	if err := json.NewEncoder(w).Encode(transformed); err != nil {
 		log.Printf("Error encoding response: %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
-		return
 	}
 }
 
@@ -196,4 +195,42 @@ func (s *Server) handleGenerate(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Disposition", "attachment; filename=resume.pdf")
 	w.WriteHeader(http.StatusOK)
 	w.Write(pdfBytes)
+}
+
+func (s *Server) handleSaveOrder(w http.ResponseWriter, r *http.Request) {
+	var partial PartialSectionOrder
+	if err := json.NewDecoder(r.Body).Decode(&partial); err != nil {
+		log.Printf("Error decoding request: %v", err)
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{"error": "invalid request body"})
+		return
+	}
+
+	res, err := loadResume(false)
+	if err != nil {
+		log.Printf("Error loading resume: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+		return
+	}
+
+	existing, err := LoadOrder(s.orderPath(), res)
+	if err != nil {
+		log.Printf("Error loading existing order: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+		return
+	}
+
+	MergeOrder(existing, &partial)
+
+	if err := SaveOrder(s.orderPath(), existing); err != nil {
+		log.Printf("Error saving order: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(existing)
 }

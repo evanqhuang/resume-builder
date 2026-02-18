@@ -33,3 +33,4 @@ Thumbs.db
 web/backend/data/generated/*.pdf
 generated-resume.*
 test-spacing.tex
+order.yaml

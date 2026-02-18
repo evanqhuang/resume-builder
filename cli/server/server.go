@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
 	"syscall"
 	"time"
 
@@ -18,6 +19,10 @@ import (
 type Server struct {
 	router     *chi.Mux
 	resumePath string
+}
+
+func (s *Server) orderPath() string {
+	return filepath.Join(filepath.Dir(s.resumePath), "order.yaml")
 }
 
 func Start(resumePath string, port int) error {
